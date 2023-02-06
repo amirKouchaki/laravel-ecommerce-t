@@ -19,6 +19,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import Sidebar from "./Sidebar.vue";
 import Navbar from "./Navbar.vue";
+import store from "../store";
 const { title } = defineProps({
     title: String,
 });
@@ -30,6 +31,7 @@ function updateSidebarState() {
     sidebarOpened.value = window.outerWidth > 768;
 }
 onMounted(() => {
+    store.dispatch("getUser");
     updateSidebarState();
     window.addEventListener("resize", updateSidebarState);
 });
